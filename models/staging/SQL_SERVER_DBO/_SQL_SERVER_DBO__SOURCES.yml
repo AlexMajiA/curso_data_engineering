@@ -1,0 +1,27 @@
+sources:
+
+  - name: SQL_SERVER_DBO # name of the source 
+    schema: SQL_SERVER_DBO # this is the schema our raw data lives in
+    database: ALUMNO3_DEV_BRONZE_DB # this is the name of our database
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+
+    freshness:
+      warn_after: {count: 500, period: hour}
+      error_after: {count: 500, period: day}
+
+    tables:
+
+      - name: ADDRESSES
+        loaded_at_field: _fivetran_synced
+        columns:
+          - name: ADDRESSES
+          - name: EVENTS
+          - name: ORDERS
+          - name: ORDER_ITEMS
+          - name: PRODUCTS
+          - name: PROMOS
+          - name: USERS
