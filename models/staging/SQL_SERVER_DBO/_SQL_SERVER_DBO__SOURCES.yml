@@ -83,6 +83,9 @@ sources:
             data_tests:
                - not_null
                - unique
+               - relationships:
+                  to: source('SQL_SERVER_DBO','ORDER_ITEMS')
+                  field: ORDER_ID
           - name: SHIPPING_SERVICE
           - name: SHIPPING_COST
             data_tests:
@@ -115,7 +118,19 @@ sources:
         loaded_at_field: _fivetran_synced
         columns:
           - name: ORDER_ID
+            data_tests:
+               - not_null
+               - unique
+               - relationships:
+                  to: source('SQL_SERVER_DBO','ORDERS')
+                  field: ORDER_ID
           - name: PRODUCT_ID
+            data_tests:
+               - not_null
+               - unique
+               - relationships:
+                  to: source('SQL_SERVER_DBO','PRODUCTS')
+                  field: PRODUCT_ID
           - name: QUANTITY
           - name: _FIVETRAN_DELETED
           - name: _FIVETRAN_SYNCED
@@ -123,9 +138,21 @@ sources:
         loaded_at_field: _fivetran_synced
         columns:
           - name: PRODUCT_ID
+            data_tests:
+               - not_null
+               - unique
+               - relationships:
+                  to: source('SQL_SERVER_DBO','ORDER_ITEMS')
+                  field: PRODUCT_ID
           - name: PRICE
+            data_tests:
+               - not_null
           - name: NAME
+            data_tests:
+               - not_null
           - name: INVENTORY
+            data_tests:
+               - not_null
           - name: _FIVETRAN_DELETED
           - name: _FIVETRAN_SYNCED
       - name: PROMOS
