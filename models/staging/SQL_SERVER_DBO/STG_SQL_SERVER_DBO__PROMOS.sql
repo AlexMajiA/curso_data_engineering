@@ -3,28 +3,32 @@
     materialized='view'
   )
 }}
-
-WITH src_budget AS (
+-- Fuente principal de promociones
+WITH FUENTE_PRINCIPAL AS (
     SELECT * 
     FROM {{ source('SQL_SERVER_DBO', 'PROMOS') }}
     ),
 
 promos_casted AS (
     SELECT
-          md5(PROMO_ID) AS PROMO_ID
-         , PROMO_ID AS PROMO_NAME
-	     , DISCOUNT
-	     , STATUS
-	     , _FIVETRAN_DELETED
-	     , _FIVETRAN_SYNCED
-         , _fivetran_synced AS date_load
-    FROM src_budget
+         md5(cast(PROMO_ID as varchar)) AS PROMO_ID,
+         PROMO_ID AS PROMO_NAME,
+	     CAST(DISCOUNT AS FLOAT) AS DISCOUNT,
+	     STATUS,
+	     _FIVETRAN_DELETED,
+	     _FIVETRAN_SYNCED
+         FROM FUENTE_PRINCIPAL
     UNION ALL
-        SELECT
-        
-    )
-    
 
-    
+    SELECT
+    --Añado fila sin promo
+        MD5('Sin_Promo') AS PROMO_ID,
+        'Sin_Promo' AS PROMO_NAME,
+        0 AS DISCOUNT,
+        'Inactive' as STATUS,
+        null AS _FIVETRAN_DELETED,
+        CURRENT_TIMESTAMP AS DATE_LOAD
+
+    )
 
 SELECT * FROM promos_casted

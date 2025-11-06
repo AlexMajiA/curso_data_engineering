@@ -80,18 +80,35 @@ sources:
         loaded_at_field: _fivetran_synced
         columns:
           - name: ORDER_ID
+            data_tests:
+               - not_null
+               - unique
           - name: SHIPPING_SERVICE
           - name: SHIPPING_COST
+            data_tests:
+               - not_null
           - name: ADDRESS_ID
+            data_tests:
+               - not_null
           - name: CREATED_AT
+            data_tests:
+               - not_null
           - name: PROMO_ID
           - name: ESTIMATED_DELIVERY_AT
           - name: ORDER_COST
+            data_tests:
+               - not_null
           - name: USER_ID
           - name: ORDER_TOTAL
+            data_tests:
+               - not_null
+               - unique
           - name: DELIVERED_AT
           - name: TRACKING_ID
           - name: STATUS
+            data_tests:
+              - not_null
+              - unique
           - name: _FIVETRAN_DELETED
           - name: _FIVETRAN_SYNCED
       - name: ORDER_ITEMS
