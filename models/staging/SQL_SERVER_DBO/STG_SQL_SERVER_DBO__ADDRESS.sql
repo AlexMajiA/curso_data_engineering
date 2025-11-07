@@ -7,17 +7,16 @@
 
 WITH src_budget AS (
     SELECT * 
-    FROM {{ source('SQL_SERVER_DBO', 'PRODUCTS') }}
+    FROM {{ source('google_sheets', 'budget') }}
     ),
 
 renamed_casted AS (
     SELECT
-     	PRODUCT_ID ,
-	PRICE ,
-	NAME ,
-	INVENTORY ,
-	_FIVETRAN_DELETED ,
-	_FIVETRAN_SYNCED ,
+          _row
+        , product_id
+        , quantity
+        , month
+        , _fivetran_synced AS date_load
     FROM src_budget
     )
 
