@@ -3,7 +3,7 @@
     materialized='view'
   )
 }}
-SQL_SERVER_DBO
+
 WITH FUENTE_PRINCIPAL AS (
     SELECT * 
     FROM {{ source('SQL_SERVER_DBO', 'ORDERS') }}
