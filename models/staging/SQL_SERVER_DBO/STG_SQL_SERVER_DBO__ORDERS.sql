@@ -12,8 +12,13 @@ WITH FUENTE_PRINCIPAL AS (
 ORDERS_CASTED AS (
     SELECT
         ORDER_ID ,
-        SHIPPING_SERVICE ,
-        SHIPPING_COST ,
+        SHIPPING_SERVICE 
+           CASE 
+                WHEN STATUS = 'preparacion' AND (SHIPPING_SERVICE IS NULL OR SHIPPING_SERVICE = '') 
+                    THEN 'No_shipping_service'
+                ELSE SHIPPING_SERVICE
+            END AS SHIPPING_SERVICE
+        cast(SHIPPING_COST as decimal (12,2)) AS SHIPPING_COST ,
         ADDRESS_ID ,
         CREATED_AT ,
         md5(cast(PROMO_ID as varchar)) AS PROMO_ID,

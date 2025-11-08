@@ -3,7 +3,7 @@
     materialized='view'
   )
 }}
--- Fuente principal de promociones
+
 WITH FUENTE_PRINCIPAL AS (
     SELECT * 
     FROM {{ source('SQL_SERVER_DBO', 'PROMOS') }}
@@ -18,6 +18,7 @@ promos_casted AS (
 	     _FIVETRAN_DELETED,
 	     CONVERT_TIMEZONE ('UTC', _FIVETRAN_SYNCED)
          FROM FUENTE_PRINCIPAL
+         
     UNION ALL
 
     SELECT
