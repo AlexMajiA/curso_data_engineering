@@ -201,5 +201,7 @@ sources:
             data_tests:
               - not_null
               - unique
+              - dbt_utils.expression_is_true:
+                expression: "EMAIL RLIKE '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$'"
           - name: _FIVETRAN_DELETED
           - name: _FIVETRAN_SYNCED
