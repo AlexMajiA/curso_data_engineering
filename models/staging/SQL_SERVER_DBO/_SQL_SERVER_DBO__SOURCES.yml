@@ -1,6 +1,5 @@
 sources:
-
-  - name: SQL_SERVER_DBO # name of the source 
+  - name: SQL_SERVER_DBO # name of the source
     schema: SQL_SERVER_DBO # this is the schema our raw data lives in
     database: ALUMNO3_DEV_BRONZE_DB # this is the name of our database
 
@@ -10,11 +9,10 @@ sources:
       identifier: false
 
     freshness:
-      warn_after: {count: 500, period: hour}
-      error_after: {count: 500, period: day}
+      warn_after: { count: 500, period: hour }
+      error_after: { count: 500, period: day }
 
     tables:
-
       - name: ADDRESSES
         description: "Contiene los datos relacionados con las direcciones de los clientes."
         loaded_at_field: _fivetran_synced
@@ -22,25 +20,25 @@ sources:
           - name: ADDRESS_ID
             description: "Identificador único de la dirección. Clave primaria de la tabla."
             data_tests:
-               - not_null
-               - unique
+              - not_null
+              - unique
           - name: ZIPCODE
             description: "Código postal de la dirección."
             data_tests:
-               - not_null
+              - not_null
           - name: COUNTRY
             description: "País perteneciente a la dirección."
             data_tests:
-               - not_null
+              - not_null
           - name: ADDRESS
             description: "Dirección del usuario."
             data_tests:
-               - not_null
-               - unique
+              - not_null
+              - unique
           - name: STATE
             description: "Estado al que pertenece la dirección."
             data_tests:
-               - not_null
+              - not_null
           - name: _FIVETRAN_DELETED
             description: "Indica si el registro fue eliminado en la fuente original."
           - name: _FIVETRAN_SYNCED
@@ -50,31 +48,31 @@ sources:
         columns:
           - name: EVENT_ID
             data_tests:
-               - not_null
+              - not_null
           - name: PAGE_URL
             data_tests:
-               - not_null
+              - not_null
           - name: EVENT_TYPE
             data_tests:
-               - not_null
+              - not_null
           - name: USER_ID
             data_tests:
-               - not_null
-               - relationships:
+              - not_null
+              - relationships:
                   to: source('SQL_SERVER_DBO','USERS')
                   field: USER_ID
           - name: PRODUCT_ID
             data_tests:
-               - relationships:
+              - relationships:
                   to: source('SQL_SERVER_DBO','PRODUCTS')
                   field: PRODUCT_ID
-                  where: "PRODUCT_ID is not null and trim(PRODUCT_ID) != ''"  #Solo valida las filas donde si hay valor, esta columna contiene vacíos.
+                  where: "PRODUCT_ID is not null and trim(PRODUCT_ID) != ''" #Solo valida las filas donde si hay valor, esta columna contiene vacíos.
           - name: SESSION_ID
             data_tests:
-               - not_null
+              - not_null
           - name: CREATED_AT
             data_tests:
-               - not_null
+              - not_null
           - name: ORDER_ID
           - name: _FIVETRAN_DELETED
           - name: _FIVETRAN_SYNCED
@@ -83,28 +81,28 @@ sources:
         columns:
           - name: ORDER_ID
             data_tests:
-               - relationships:
+              - relationships:
                   to: source('SQL_SERVER_DBO','ORDER_ITEMS')
                   field: ORDER_ID
           - name: SHIPPING_SERVICE
           - name: SHIPPING_COST
             data_tests:
-               - not_null
+              - not_null
           - name: ADDRESS_ID
             data_tests:
-               - not_null
+              - not_null
           - name: CREATED_AT
             data_tests:
-               - not_null
+              - not_null
           - name: PROMO_ID
           - name: ESTIMATED_DELIVERY_AT
           - name: ORDER_COST
             data_tests:
-               - not_null
+              - not_null
           - name: USER_ID
           - name: ORDER_TOTAL
             data_tests:
-               - not_null
+              - not_null
           - name: DELIVERED_AT
           - name: TRACKING_ID
           - name: STATUS
@@ -117,17 +115,17 @@ sources:
         columns:
           - name: ORDER_ID
             data_tests:
-               - not_null
-               - relationships:
+              - not_null
+              - relationships:
                   to: source('SQL_SERVER_DBO','ORDERS')
                   field: ORDER_ID
           - name: PRODUCT_ID
             meta:
               disable_source_tests:
-              - unique
+                - unique
             data_tests:
-               - not_null
-               - relationships:
+              - not_null
+              - relationships:
                   to: source('SQL_SERVER_DBO','PRODUCTS')
                   field: PRODUCT_ID
           - name: QUANTITY
@@ -138,19 +136,19 @@ sources:
         columns:
           - name: PRODUCT_ID
             data_tests:
-               - not_null
-               - relationships:
+              - not_null
+              - relationships:
                   to: source('SQL_SERVER_DBO','ORDER_ITEMS')
                   field: PRODUCT_ID
           - name: PRICE
             data_tests:
-               - not_null
+              - not_null
           - name: NAME
             data_tests:
-               - not_null
+              - not_null
           - name: INVENTORY
             data_tests:
-               - not_null
+              - not_null
           - name: _FIVETRAN_DELETED
           - name: _FIVETRAN_SYNCED
       - name: PROMOS
@@ -158,17 +156,17 @@ sources:
         columns:
           - name: PROMO_ID
             data_tests:
-               - not_null
-               - unique
-               - relationships:
+              - not_null
+              - unique
+              - relationships:
                   to: source('SQL_SERVER_DBO','ORDERS')
                   field: PROMO_ID
           - name: DISCOUNT
             data_tests:
-               - not_null  
+              - not_null
           - name: STATUS
             data_tests:
-               - not_null
+              - not_null
           - name: _FIVETRAN_DELETED
           - name: _FIVETRAN_SYNCED
       - name: USERS
@@ -177,11 +175,11 @@ sources:
         columns:
           - name: USER_ID #No lo relaciono con ORDERS, xq un usuario, puede o no tener pedidos, solo puede haberse registrado.
             data_tests:
-               - not_null
-               - unique
+              - not_null
+              - unique
           - name: UPDATED_AT
             data_tests:
-               - not_null
+              - not_null
           - name: ADDRESS_ID
             data_tests:
               - not_null
@@ -190,18 +188,20 @@ sources:
                   field: ADDRESS_ID
           - name: LAST_NAME
             data_tests:
-               - not_null
+              - not_null
           - name: CREATED_AT
             data_tests:
-               - not_null
+              - not_null
           - name: PROMO_IPHONE_NUMBERD
           - name: TOTAL_ORDERS
           - name: FIRST_NAME
             data_tests:
-               - not_null
+              - not_null
           - name: EMAIL
             data_tests:
-               - not_null
-               - unique
+              - not_null
+              - unique
+              - dbt_utils.expression_is_true:
+                  expression: "EMAIL RLIKE '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$'"
           - name: _FIVETRAN_DELETED
           - name: _FIVETRAN_SYNCED
