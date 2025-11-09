@@ -17,10 +17,10 @@ renamed_casted AS (
         ADDRESS_ID ,
         LAST_NAME ,
         CONVERT_TIMEZONE('Europe/Madrid', CREATED_AT::TIMESTAMP_NTZ) AS CREATED_AT,
-        REGEXP_REPLACE(PHONE_NUMBER, '[^0-9]', '') AS PHONE_NUMBER_CLEAN
+        REGEXP_REPLACE(PHONE_NUMBER, '[^0-9]', '') AS PHONE_NUMBER_CLEAN,
         TOTAL_ORDERS ,
         FIRST_NAME ,
-        EMAIL ,
+        lower(trim(EMAIL)) AS EMAIL_CLEAN ,
         _FIVETRAN_DELETED ,
         CONVERT_TIMEZONE('Europe/Madrid', _FIVETRAN_SYNCED::TIMESTAMP_NTZ) AS FIVETRAN_SYNCED
     FROM src_budget
