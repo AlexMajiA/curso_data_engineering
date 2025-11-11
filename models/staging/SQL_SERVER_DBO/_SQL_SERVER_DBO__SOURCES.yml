@@ -142,7 +142,9 @@ sources:
                   field: PRODUCT_ID
           - name: PRICE
             data_tests:
-              - not_null
+                - not_null
+                - dbt_utils.expression_is_true:
+                    expression: "PRICE > 0"  # lo pongo mayor que cero, por si hace una promoción a 0€
           - name: NAME
             data_tests:
               - not_null

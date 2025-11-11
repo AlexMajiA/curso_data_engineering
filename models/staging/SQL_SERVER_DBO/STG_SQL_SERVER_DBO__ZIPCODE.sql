@@ -12,11 +12,13 @@ WITH zipcode_normalizado AS (
 
 zipcode_casted AS (
     SELECT DISTINCT
-        md5(lower(trim(cast(ZIPCODE_HASH AS varchar)))) AS ZIPCODE_HASH,
-        trim(ZIPCODE_NAME) AS ZIPCODE_NAME
+        ADDRESS_ID,
+        ZIPCODE_HASH,
+        ADDRESS_NAME,
+        STATE_NAME,
+        COUNTRY_NAME
     FROM zipcode_normalizado
     )
 
 SELECT * FROM zipcode_casted
 
---stg_zipcodes (con ZIPCODE, STATE_ID)

@@ -44,3 +44,7 @@ models:
 seeds: 
   +database: "ALUMNO3_DEV_BRONZE_DB"
   +schema: "SEEDS"
+
+  #global variable
+vars:  
+  num_undefined: 0

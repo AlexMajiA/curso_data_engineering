@@ -14,7 +14,7 @@ addresses_casted AS (
     SELECT
         ADDRESS_ID,
         md5(lower(trim(cast(ZIPCODE AS varchar)))) AS ZIPCODE_HASH, --siempre minuscula para que el hash sea el mismo.
-        trim(ZIPCODE) AS ZIPCODE_NAME,
+        --trim(ZIPCODE) AS ZIPCODE_NAME,
         md5(lower(trim(COUNTRY))) AS COUNTRY_HASH,
         trim(COUNTRY) AS COUNTRY_NAME,
         md5(lower(trim(cast(ADDRESS AS varchar)))) AS ADDRESS_HASH,
