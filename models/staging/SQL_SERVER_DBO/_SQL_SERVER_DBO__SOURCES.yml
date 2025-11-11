@@ -207,3 +207,14 @@ sources:
                   expression: "EMAIL RLIKE '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$'"
           - name: _FIVETRAN_DELETED
           - name: _FIVETRAN_SYNCED
+
+
+#Silver → limpieza y normalización mínima.
+
+#Base → relaciones y filtrado de registros activos.
+
+#Gold → métricas y hechos calculados para análisis.
+
+#IS_DELETED se aplica en Silver y Base para consistencia.
+
+#TOTAL_ORDERS y similares solo se calculan en Gold, nunca en Base.

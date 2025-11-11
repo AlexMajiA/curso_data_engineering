@@ -27,7 +27,7 @@ addresses_cleaned AS (
         md5(lower(trim(STATE))) AS STATE_HASH,
         upper(trim(STATE)) AS STATE_NAME,
 
-        coalesce(_fivetran_deleted, false) as is_deleted, --Marco si un registro fue eliminado en origen.
+        coalesce(_FIVETRAN_DELETED, false) as Is_deleted, --Marco si un registro fue eliminado en origen.
         CONVERT_TIMEZONE('Europe/Madrid', _FIVETRAN_SYNCED::TIMESTAMP_NTZ) AS FIVETRAN_SYNCED
 
     FROM addresses_source
