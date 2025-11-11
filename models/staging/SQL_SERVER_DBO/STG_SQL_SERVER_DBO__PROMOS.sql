@@ -25,7 +25,7 @@ promos_casted AS (
     --Añado fila sin promo
         MD5('Sin_Promo') AS PROMO_HASH,
         'Sin_Promo' AS PROMO_NAME,
-        0 AS DISCOUNT,
+        '{{ var('num_undefined')}}' AS DISCOUNT,
         'Inactive' as STATUS,
         null AS _FIVETRAN_DELETED,
         CURRENT_TIMESTAMP AS FIVETRAN_SYNCED
