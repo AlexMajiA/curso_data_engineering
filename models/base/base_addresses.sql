@@ -2,7 +2,7 @@
 
 WITH stg AS (
     SELECT *
-    FROM {{ ref('STG_SQL_SERVER_DBO__ADDRESSES') }}
+    FROM {{ source('SQL_SERVER_DBO', 'ADDRESSES') }} 
 )
 
 SELECT
@@ -17,3 +17,4 @@ WHERE not is_deleted  --Añado solo los registros activos
 
 --Aquí no pongo md5, porque relaciono con addres_id.
 --los mantengo en stg para las dimensiones analíticas.
+
